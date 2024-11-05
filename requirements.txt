@@ -1,0 +1,8 @@
+python-dotenv
+langchain
+langchain-community
+pinecone-client
+tiktoken
+langchain-groq
+groq
+streamlit

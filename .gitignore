@@ -1,0 +1,5 @@
+# Ignore environment variables file
+.env
+
+# Ignore configuration files
+config.json
