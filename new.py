@@ -82,7 +82,7 @@ def main():
 
     # Display chat history if there are any messages
     if st.session_state['messages']:
-        st.markdown("<h3>Chatbot Interaction:</h3>", unsafe_allow_html=True)
+        st.markdown("<h3>Chatbot Interaction for Google Products:</h3>", unsafe_allow_html=True)
         for message in st.session_state['messages']:
             role = message['role']
             content = message['content']
