@@ -54,6 +54,13 @@ def clear_chat_history():
 if st.sidebar.button('Clear Chat History'):
     clear_chat_history()
 
+# Expander in sidebar
+with st.sidebar.expander("Some Quick Prompts for Reference"):
+    st.write("List all the Google Smart Phones")
+    st.write("Compare Pixel 6 and Pixel 6a in tabular format")
+    st.write("How to connect Ear Buds")
+    st.write("What are the features of Thermostat")
+
 # Initialize messages if not already in session state
 if 'messages' not in st.session_state:
     st.session_state['messages'] = [{"role": "assistant", "content": "What's on your mind today?"}]  # Set initial message
