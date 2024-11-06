@@ -1,6 +1,7 @@
 # Retail-Product-Catalog-Q-and-A-Google-Products
 Its a chat bot like Amazon's RUFUS for Google Products.
 
+### data link = https://drive.google.com/drive/folders/16yOFF665FdZK068p8M46KGGg4BAS7lRi?usp=sharing
 
 Working Architecture of Retail-Product Catalog Q&A product 
 
