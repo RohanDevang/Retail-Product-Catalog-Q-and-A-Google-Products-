@@ -117,7 +117,7 @@ def main():
         st.rerun()
 
 
-def retrieve_query(query, k = 5 ):
+def retrieve_query(query, k = 10 ):
     query_embedding = embeddings.embed_query(query)
     results = index.query(vector=query_embedding, top_k=k, include_metadata=True)
     matching_results = [result['metadata']['text'] for result in results['matches']]
