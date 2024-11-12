@@ -14,7 +14,7 @@ pc = Pinecone(api_key=os.getenv('PINE_CONE_KEY'))
 index = pc.Index("vector-embeddings")
 
 # Initialize OpenAI Embeddings
-embeddings = OpenAIEmbeddings(api_key = st.secrets['OPENAI_API_KEY'])
+embeddings = OpenAIEmbeddings(api_key=st.secrets['OPENAI_API_KEY'])
 system_instruction = "You are a helpful assistant."
 
 logo = "./G.png"
@@ -29,7 +29,7 @@ st.set_page_config(
 
 # Sidebar components
 st.sidebar.markdown(
-    "<h1 style='font-size:35px; color:white;'>🤖 Pixel AI Bot</h1>", 
+    "<h1 style='font-size:35px; color:white;'>🤖 Pixel AI Bot</h1>",
     unsafe_allow_html=True
 )
 
@@ -82,7 +82,7 @@ def main():
 
     # Display chat history if there are any messages
     if st.session_state['messages']:
-        st.markdown("<h3>Chatbot Interaction for Google Products:</h3>", unsafe_allow_html=True)
+        st.markdown("<h3>Chatbot Interaction:</h3>", unsafe_allow_html=True)
         for message in st.session_state['messages']:
             role = message['role']
             content = message['content']
@@ -117,7 +117,7 @@ def main():
         st.rerun()
 
 
-def retrieve_query(query, k = 10 ):
+def retrieve_query(query, k = 10):
     query_embedding = embeddings.embed_query(query)
     results = index.query(vector=query_embedding, top_k=k, include_metadata=True)
     matching_results = [result['metadata']['text'] for result in results['matches']]
@@ -128,10 +128,17 @@ def generate_text_groq(prompt, llm, max_tokens=400):
     return response.content
 
 def answer_from_doc_search(doc_search, query, llm):
+    if len(query.split()) < 3:
+        return "Cannot generate answers with one or two words."
+    
     combined_docs = "\n\n".join(doc for doc in doc_search)
-    prompt = f"{system_instruction}\n\nAnswer the question concisely and accurately based on the following documents.\n\nQuestion: {query}\n\nDocuments:\n{combined_docs}"
-    answer = generate_text_groq(prompt, llm)
-    return answer
+    prompt = (
+        f"{system_instruction}\n\n"
+        f"Answer the question concisely and accurately based on the following documents.\n\n"
+        f"Question: {query}\n\n"
+        f"Documents:\n{combined_docs}"
+    )
+    return generate_text_groq(prompt, llm)
 
 if __name__ == "__main__":
     main()
